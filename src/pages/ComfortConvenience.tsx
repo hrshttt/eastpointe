@@ -13,6 +13,7 @@ import {
   MapPin,
   Clock,
   Navigation,
+  LogOut,
 } from "lucide-react";
 
 const amenities = [
@@ -60,6 +61,11 @@ const amenities = [
     icon: Key,
     title: "Self Check-in",
     desc: "Seamless arrival experience with a secure, personalized door code.",
+  },
+  {
+    icon: LogOut,
+    title: "Easy Checkout",
+    desc: "Extra easy checkout experience.",
   },
 ];
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Hero from "../components/Hero";
 import {
   Users,
@@ -12,6 +12,59 @@ import {
 } from "lucide-react";
 import CabinModal, { CabinData } from "../components/CabinModal";
 
+// --- Animation Hook & Component ---
+
+const useInView = (options = { threshold: 0.1, triggerOnce: true }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsInView(true);
+        if (options.triggerOnce && ref.current) {
+          observer.unobserve(ref.current);
+        }
+      }
+    }, options);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [options.threshold, options.triggerOnce]);
+
+  return { ref, isInView };
+};
+
+const FadeIn: React.FC<{
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+  direction?: "up" | "none";
+}> = ({ children, delay = 0, className = "", direction = "up" }) => {
+  const { ref, isInView } = useInView();
+
+  const transformClass = direction === "up" ? "translate-y-8" : "";
+
+  return (
+    <div
+      ref={ref}
+      className={`transition-all duration-1000 ease-out transform ${
+        isInView ? "opacity-100 translate-y-0" : `opacity-0 ${transformClass}`
+      } ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </div>
+  );
+};
+
 // Helper to generate image paths based on folder structure
 const getImages = (folder: string, count: number, ext: string = "jpeg") =>
   Array.from({ length: count }, (_, i) => `/Cabin/${folder}/${i + 1}.${ext}`);
@@ -23,15 +76,15 @@ const cabins: CabinData[] = [
     sleeps: "15",
     bedrooms: "5 Bedrooms + Loft",
     baths: 3,
-    desc: "A spacious 3,000 sq ft lakeside sanctuary perfect for large family reunions or wedding groups. Whether you're craving some quality time with loved ones, traveling for a wedding, or looking to unwind by the water, this spacious 5-bedroom + loft, 3-bath vacation rental cabin is the perfect home base! Gather around the crackling fire pit while gazing out at the still lake.",
+    desc: "A spacious 3,200 sq ft lakeside sanctuary perfect for large family reunions or wedding groups. Whether you're craving some quality time with loved ones, traveling for a wedding, or looking to unwind by the water, this spacious 5-bedroom + loft, 3-bath vacation rental cabin is the perfect home base! Gather around the crackling fire pit while gazing out at the still lake.",
     status: "Available",
-    sqFt: "3,000",
+    sqFt: "3,200",
     location: "Odessa, MO",
     features: [
       "Deck w/ dining area",
       "Covered patio w/ lounge seating",
       "2 gas grills, charcoal grill",
-      "2 wood-burning fire pits",
+      "Private fire pit",
       "Direct Lake access",
       "Bench swing",
       "4 Smart TVs, video library",
@@ -43,64 +96,10 @@ const cabins: CabinData[] = [
       { room: "Bedroom 3", bed: "1 Queen Bed" },
       { room: "Bedroom 4", bed: "1 Queen Bed" },
       { room: "Bedroom 5", bed: "2 Twin Beds" },
-      { room: "Loft", bed: "3 Twin Beds, 1 Toddler Bed" },
+      { room: "Loft", bed: "4 Twin Beds" },
       { room: "Living Room", bed: "1 Full Sleeper Sofa" },
     ],
     images: getImages("Bayview", 13, "jpeg"),
-    bookingLink: "#",
-  },
-  {
-    id: 2,
-    name: "Byrd's Nest",
-    sleeps: "4",
-    bedrooms: "2 Bedrooms",
-    baths: 1,
-    desc: "Pet Friendly w/ Fee | Furnished Outdoor Space | BBQ Ready | 4 Mi to Downtown. Escape the city buzz at ‘Byrd's Nest’ — a vacation rental in Odessa. In addition to its peaceful setting just steps from Lake Lafayette, this charming 2-bedroom, 1-bath cabin offers easy access to local hot spots like Historic Downtown Odessa, Powell Gardens, I-70 Speedway, and more. When you’re not out exploring, be sure to spend some time around the fire pit or head inside to enjoy a relaxing game night.",
-    status: "Available",
-    location: "Odessa, MO",
-    features: [
-      "Furnished patio w/ outdoor dining",
-      "Yard w/ wood-burning fire pit",
-      "Kitchenette (fridge, stovetop, microwave, air fryer)",
-      "Pet friendly (w/ fee)",
-      "Flat-screen TV, Fireplace",
-      "Lake Lafayette access on-site",
-      "Driveway parking (5 vehicles)",
-      "Single-story cabin (1 step access)",
-    ],
-    sleepingArrangements: [
-      { room: "Bedroom 1", bed: "1 Queen Bed" },
-      { room: "Bedroom 2", bed: "2 Twin Beds" },
-    ],
-    images: getImages("BYRD's Nest", 12, "jpeg"),
-    bookingLink: "#",
-  },
-  {
-    id: 3,
-    name: "Cedar Pointe",
-    sleeps: "6",
-    bedrooms: "2 Bedrooms",
-    baths: 1.5,
-    desc: "Private Fire Pit w/ Seating | BBQ Ready | Outdoor Dining w/ Lake View. Lakefront relaxation awaits at this Odessa vacation rental. Whether you’re looking to fish, explore Historic Downtown shops and restaurants, or simply enjoy the tranquil countryside setting, this 2-bedroom, 1.5-bath cabin is perfect for you and your crew. When you’re ready to venture out, be sure to visit the Powell Gardens or catch a race just up the road at I-70 Speedway.",
-    status: "Available",
-    location: "Odessa, MO",
-    features: [
-      "Furnished porch w/ outdoor dining",
-      "Wood-burning fire pit",
-      "Kitchenette (stovetop, fridge, microwave, air fryer)",
-      "Flat-screen TV & Board games",
-      "Charcoal grill",
-      "Driveway parking (5 vehicles)",
-      "Lake Lafayette access on-site",
-      "Single-story (5 steps access)",
-      "No pets allowed",
-    ],
-    sleepingArrangements: [
-      { room: "Bedroom 1", bed: "1 Queen Bed" },
-      { room: "Bedroom 2", bed: "2 Twin Beds" },
-      { room: "Living Room", bed: "1 Sleeper Sofa" },
-    ],
-    images: getImages("Cedar Pointe", 12, "jpeg"),
     bookingLink: "#",
   },
   {
@@ -138,7 +137,7 @@ const cabins: CabinData[] = [
     features: [
       "Built w/ Recycled Materials",
       "Private deck w/ outdoor seating",
-      "Wood-burning fire pit",
+      "Private fire pit",
       "Kitchen (stove/oven, fridge, microwave)",
       "Flat-screen TV",
       "Central A/C & heating",
@@ -151,6 +150,60 @@ const cabins: CabinData[] = [
       { room: "Bedroom 3", bed: "3 Twin Beds" },
     ],
     images: getImages("Aspire", 18, "jpg"),
+    bookingLink: "#",
+  },
+  {
+    id: 3,
+    name: "Cedar Pointe",
+    sleeps: "6",
+    bedrooms: "2 Bedrooms",
+    baths: 1.5,
+    desc: "Private Fire Pit w/ Seating | BBQ Ready | Outdoor Dining w/ Lake View. Lakefront relaxation awaits at this Odessa vacation rental. Whether you’re looking to fish, explore Historic Downtown shops and restaurants, or simply enjoy the tranquil countryside setting, this 2-bedroom, 1.5-bath cabin is perfect for you and your crew. When you’re ready to venture out, be sure to visit the Powell Gardens or catch a race just up the road at I-70 Speedway.",
+    status: "Available",
+    location: "Odessa, MO",
+    features: [
+      "Furnished porch w/ outdoor dining",
+      "Wood-burning fire pit",
+      "Kitchenette (stovetop, fridge, microwave, air fryer)",
+      "Flat-screen TV & Board games",
+      "Charcoal grill",
+      "Driveway parking (5 vehicles)",
+      "Lake Lafayette access on-site",
+      "Single-story (5 steps access)",
+      "No pets allowed",
+    ],
+    sleepingArrangements: [
+      { room: "Bedroom 1", bed: "1 Queen Bed" },
+      { room: "Bedroom 2", bed: "2 Twin Beds" },
+      { room: "Living Room", bed: "1 Sleeper Sofa" },
+    ],
+    images: getImages("Cedar Pointe", 12, "jpeg"),
+    bookingLink: "#",
+  },
+  {
+    id: 2,
+    name: "Byrd's Nest",
+    sleeps: "4",
+    bedrooms: "2 Bedrooms",
+    baths: 1,
+    desc: "Pet Friendly w/ Fee | Furnished Outdoor Space | BBQ Ready | 4 Mi to Downtown. Escape the city buzz at ‘Byrd's Nest’ — a vacation rental in Odessa. In addition to its peaceful setting just steps from Lake Lafayette, this charming 2-bedroom, 1-bath cabin offers easy access to local hot spots like Historic Downtown Odessa, Powell Gardens, I-70 Speedway, and more. When you’re not out exploring, be sure to spend some time around the fire pit or head inside to enjoy a relaxing game night.",
+    status: "Available",
+    location: "Odessa, MO",
+    features: [
+      "Furnished patio w/ outdoor dining",
+      "Private fire pit",
+      "Kitchenette (fridge, stovetop, microwave, air fryer)",
+      "Pet friendly (w/ fee)",
+      "Flat-screen TV, Fireplace",
+      "Lake Lafayette access on-site",
+      "Driveway parking (5 vehicles)",
+      "Single-story cabin (1 step access)",
+    ],
+    sleepingArrangements: [
+      { room: "Bedroom 1", bed: "1 Queen Bed" },
+      { room: "Bedroom 2", bed: "2 Twin Beds" },
+    ],
+    images: getImages("BYRD's Nest", 12, "jpeg"),
     bookingLink: "#",
   },
   {
@@ -447,7 +500,7 @@ const CabinCollection: React.FC = () => {
                       href="https://www.google.com/maps/dir/?api=1&destination=38.9458417,-93.9713331"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors mt-1"
+                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent hover:text-white transition-colors"
                     >
                       <Navigation size={14} /> Get Directions
                     </a>

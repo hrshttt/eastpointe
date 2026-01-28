@@ -106,7 +106,7 @@ const Layout: React.FC = () => {
                 <span
                   className={`text-[0.6rem] uppercase tracking-[0.3em] font-medium opacity-70 ${textColor} ml-0.5`}
                 >
-                  Luxury Retreats
+                  Lake Cabin Experience
                 </span>
               </div>
             </NavLink>
@@ -293,7 +293,7 @@ const Layout: React.FC = () => {
                     EAST POINTE
                   </span>
                   <span className="text-[0.6rem] uppercase tracking-[0.3em] font-medium opacity-70 text-white ml-0.5">
-                    Luxury Retreats
+                    Lake Cabin Experience
                   </span>
                 </div>
               </div>

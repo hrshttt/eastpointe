@@ -16,6 +16,8 @@ import {
   Quote,
   Fish,
   Navigation,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -110,6 +112,86 @@ const CAROUSEL_ITEMS = [
 
 const Home: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  // Initialize scroll position to the middle set on load
+  useEffect(() => {
+    if (sliderRef.current) {
+      const scrollContainer = sliderRef.current;
+      // Wait slightly for layout to settle if needed, or check regularly in animation loop
+      // We'll rely on the animation loop to snap it if it starts at 0
+      if (scrollContainer.scrollLeft === 0 && scrollContainer.scrollWidth > 0) {
+        scrollContainer.scrollLeft = scrollContainer.scrollWidth / 3;
+      }
+    }
+  }, []);
+
+  // Auto-scroll & Infinite Loop Logic
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const animate = () => {
+      if (!sliderRef.current) return;
+      const scrollContainer = sliderRef.current;
+
+      // Calculate the width of one set of items (Total / 3 sets)
+      const oneSetWidth = scrollContainer.scrollWidth / 3;
+
+      // Move slider if not hovering
+      if (!isHovered) {
+        scrollContainer.scrollLeft += 1; // Adjust speed (pixels per frame)
+      }
+
+      // --- Infinite Boundary Checks ---
+
+      // If we scroll past the 2nd set (entering the 3rd), jump back to start of 2nd
+      if (scrollContainer.scrollLeft >= oneSetWidth * 2) {
+        scrollContainer.scrollLeft -= oneSetWidth;
+      }
+      // If we are in the 1st set (e.g. scrolled back too far), jump forward to 2nd
+      // We use a small buffer (5) to ensure we don't get stuck at exactly 0
+      else if (scrollContainer.scrollLeft <= 5) {
+        scrollContainer.scrollLeft += oneSetWidth;
+      }
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    animationFrameId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isHovered]);
+
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (!sliderRef.current) return;
+    const scrollContainer = sliderRef.current;
+
+    // Width of one full copy of the data
+    const oneSetWidth = scrollContainer.scrollWidth / 3;
+
+    // Scroll amount per click
+    const scrollAmount =
+      scrollContainer.clientWidth < 768
+        ? window.innerWidth * 0.85
+        : window.innerWidth * 0.3;
+
+    if (direction === "left") {
+      // Infinite Backwards Logic:
+      // If we are currently in the 1st set (leftmost third), we are in danger of hitting edge 0.
+      // Jump instantly to the 2nd set (middle) before scrolling left.
+      if (scrollContainer.scrollLeft < oneSetWidth) {
+        scrollContainer.scrollLeft += oneSetWidth;
+      }
+      scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      // Infinite Forwards Logic:
+      // If we are in the 3rd set (rightmost third), we are in danger of running out.
+      // Jump instantly to the 2nd set (middle) before scrolling right.
+      if (scrollContainer.scrollLeft >= oneSetWidth * 2) {
+        scrollContainer.scrollLeft -= oneSetWidth;
+      }
+      scrollContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -129,7 +211,7 @@ const Home: React.FC = () => {
             East Pointe
           </h1>
           <p className="text-xl md:text-2xl font-light tracking-widest text-stone-100 drop-shadow-md max-w-2xl mx-auto uppercase">
-            Luxury Cabin Retreats
+            Lake Cabin Experience
           </p>
         </div>
 
@@ -167,93 +249,80 @@ const Home: React.FC = () => {
         </FadeIn>
       </section>
 
-      {/* --- FEATURED CARDS CAROUSEL (MARQUEE) --- */}
-      <section className="bg-stone-50 py-24 overflow-hidden">
+      {/* --- FEATURED CARDS CAROUSEL (ARROWS) --- */}
+      <section className="bg-stone-50 py-24 overflow-hidden relative group">
         <FadeIn>
-          {/* Continuous Marquee Slider */}
+          {/* Wrapper controls hover state for both buttons and slider */}
           <div
-            className="flex overflow-hidden select-none group"
+            className="relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
           >
-            {/* Track 1 */}
-            <div
-              className="flex shrink-0 animate-marquee min-w-full items-stretch"
-              style={{ animationPlayState: isHovered ? "paused" : "running" }}
+            {/* Navigation Arrows (Visible on Hover) */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                scrollCarousel("left");
+              }}
+              className="absolute left-4 md:left-10 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 text-primary p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-white"
+              aria-label="Scroll Left"
             >
-              {CAROUSEL_ITEMS.map((item, index) => (
-                <div
-                  key={`original-${index}`}
-                  className="w-[85vw] md:w-[30vw] flex-shrink-0 px-4"
-                >
-                  <Link
-                    to={item.link}
-                    className="group/card block h-full bg-white shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 rounded-sm overflow-hidden"
-                  >
-                    <div className="h-80 overflow-hidden relative">
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-primary/10 group-hover/card:bg-transparent transition-colors"></div>
-                    </div>
-                    <div className="p-10 relative">
-                      <div className="absolute -top-8 right-8 bg-white border border-stone-200 text-primary p-4 rounded-full shadow-lg group-hover/card:bg-primary group-hover/card:text-white group-hover/card:border-primary transition-colors duration-300">
-                        <item.icon size={24} />
-                      </div>
-                      <h3 className="text-2xl font-serif text-primary mb-4">
-                        {item.title}
-                      </h3>
-                      <p className="text-stone-500 mb-8 leading-relaxed line-clamp-3">
-                        {item.desc}
-                      </p>
-                      <span className="text-secondary text-xs font-bold uppercase tracking-widest group-hover/card:underline">
-                        Explore
-                      </span>
-                    </div>
-                  </Link>
-                </div>
-              ))}
-            </div>
+              <ChevronLeft size={28} />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                scrollCarousel("right");
+              }}
+              className="absolute right-4 md:right-10 top-1/2 transform -translate-y-1/2 z-20 bg-white/90 text-primary p-3 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-white"
+              aria-label="Scroll Right"
+            >
+              <ChevronRight size={28} />
+            </button>
 
-            {/* Track 2 (Clone for infinite loop) */}
             <div
-              className="flex shrink-0 animate-marquee min-w-full items-stretch"
-              style={{ animationPlayState: isHovered ? "paused" : "running" }}
+              ref={sliderRef}
+              className="flex overflow-x-hidden scrollbar-hide"
             >
-              {CAROUSEL_ITEMS.map((item, index) => (
-                <div
-                  key={`clone-${index}`}
-                  className="w-[85vw] md:w-[30vw] flex-shrink-0 px-4"
-                >
-                  <Link
-                    to={item.link}
-                    className="group/card block h-full bg-white shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 rounded-sm overflow-hidden"
-                  >
-                    <div className="h-80 overflow-hidden relative">
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-primary/10 group-hover/card:bg-transparent transition-colors"></div>
+              {/* Render items 3 times for robust infinite scroll (Start, Middle, End sets) */}
+              {[...Array(3)].map((_, groupIndex) => (
+                <div key={groupIndex} className="flex shrink-0 items-stretch">
+                  {CAROUSEL_ITEMS.map((item, index) => (
+                    <div
+                      key={`${groupIndex}-${index}`}
+                      className="w-[85vw] md:w-[30vw] flex-shrink-0 px-4"
+                    >
+                      <Link
+                        to={item.link}
+                        className="group/card block h-full bg-white shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 rounded-sm overflow-hidden"
+                        draggable="false"
+                      >
+                        <div className="h-80 overflow-hidden relative">
+                          <img
+                            src={item.img}
+                            alt={item.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
+                            draggable="false"
+                          />
+                          <div className="absolute inset-0 bg-primary/10 group-hover/card:bg-transparent transition-colors"></div>
+                        </div>
+                        <div className="p-10 relative">
+                          <div className="absolute -top-8 right-8 bg-white border border-stone-200 text-primary p-4 rounded-full shadow-lg group-hover/card:bg-primary group-hover/card:text-white group-hover/card:border-primary transition-colors duration-300">
+                            <item.icon size={24} />
+                          </div>
+                          <h3 className="text-2xl font-serif text-primary mb-4">
+                            {item.title}
+                          </h3>
+                          <p className="text-stone-500 mb-8 leading-relaxed line-clamp-3">
+                            {item.desc}
+                          </p>
+                          <span className="text-secondary text-xs font-bold uppercase tracking-widest group-hover/card:underline">
+                            Explore
+                          </span>
+                        </div>
+                      </Link>
                     </div>
-                    <div className="p-10 relative">
-                      <div className="absolute -top-8 right-8 bg-white border border-stone-200 text-primary p-4 rounded-full shadow-lg group-hover/card:bg-primary group-hover/card:text-white group-hover/card:border-primary transition-colors duration-300">
-                        <item.icon size={24} />
-                      </div>
-                      <h3 className="text-2xl font-serif text-primary mb-4">
-                        {item.title}
-                      </h3>
-                      <p className="text-stone-500 mb-8 leading-relaxed line-clamp-3">
-                        {item.desc}
-                      </p>
-                      <span className="text-secondary text-xs font-bold uppercase tracking-widest group-hover/card:underline">
-                        Explore
-                      </span>
-                    </div>
-                  </Link>
+                  ))}
                 </div>
               ))}
             </div>
@@ -665,13 +734,13 @@ const Home: React.FC = () => {
 
       {/* --- CTA SECTION --- */}
       <section
-        className="relative py-40 bg-fixed bg-cover bg-center"
+        className="relative py-40 bg-fixed bg-cover bg-center group"
         style={{
-          backgroundImage:
-            'url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070")',
+          backgroundImage: 'url("/Home/HomeCTA.jpeg")',
         }}
       >
-        <div className="absolute inset-0 bg-black/40 transition-opacity duration-500 hover:bg-black/30"></div>
+        {/* Subtle hover effect: Starts at 50% opacity, fades to 25% opacity on hover */}
+        <div className="absolute inset-0 bg-black/50 transition-colors duration-700 ease-in-out group-hover:bg-black/25"></div>
         <div className="relative z-10 container mx-auto px-6 text-center">
           <FadeIn>
             <h2 className="text-4xl md:text-7xl font-serif text-white mb-8 drop-shadow-lg">
