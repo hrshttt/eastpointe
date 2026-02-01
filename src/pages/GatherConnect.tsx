@@ -26,7 +26,7 @@ const GatherConnect: React.FC = () => {
       <Hero
         title="Gather & Celebrate"
         subtitle="Create lasting memories in the heart of nature."
-        image="/Community/CommunityHero.jpeg"
+        image="/Community/CommunityHero.avif"
         height="large"
       />
 
@@ -56,7 +56,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Wedding.jpg"
+                src="/Community/Wedding.avif"
                 alt="Weddings"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -93,7 +93,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden transform md:-translate-y-4">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Reunion.jpeg"
+                src="/Community/Reunion.avif"
                 alt="Reunions"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -130,7 +130,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Corporate.jpeg"
+                src="/Community/Corporate.avif"
                 alt="Corporate Retreats"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />

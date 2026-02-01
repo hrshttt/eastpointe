@@ -1,21 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
-
-export interface MediaItem {
-  type: "image" | "video";
-  src: string;
-  poster?: string;
-}
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ImageViewerProps {
-  media: MediaItem[];
+  images: string[];
   initialIndex?: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ImageViewer: React.FC<ImageViewerProps> = ({
-  media,
+  images,
   initialIndex = 0,
   isOpen,
   onClose,
@@ -29,37 +23,39 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   const nextImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      setCurrentIndex((prev) => (prev + 1) % media.length);
+      if (images && images.length > 0) {
+        setCurrentIndex((prev) => (prev + 1) % images.length);
+      }
     },
-    [media.length],
+    [images],
   );
 
   const prevImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
+      if (images && images.length > 0) {
+        setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      }
     },
-    [media.length],
+    [images],
   );
 
-  // Preload previous and next items (if they are images)
+  // Preload previous and next images
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen || !images || images.length === 0) return;
 
-    const preloadItem = (index: number) => {
-      const item = media[index];
-      if (item.type === "image") {
-        const img = new Image();
-        img.src = item.src;
-      }
+    const preloadImage = (index: number) => {
+      const src = images[index];
+      const img = new Image();
+      img.src = src;
     };
 
-    const nextIndex = (currentIndex + 1) % media.length;
-    const prevIndex = (currentIndex - 1 + media.length) % media.length;
+    const nextIndex = (currentIndex + 1) % images.length;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
 
-    preloadItem(nextIndex);
-    preloadItem(prevIndex);
-  }, [currentIndex, isOpen, media]);
+    preloadImage(nextIndex);
+    preloadImage(prevIndex);
+  }, [currentIndex, isOpen, images]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -73,9 +69,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, onClose, nextImage, prevImage]);
 
-  if (!isOpen) return null;
-
-  const currentItem = media[currentIndex];
+  if (!isOpen || !images || images.length === 0) return null;
 
   return (
     <div className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center backdrop-blur-sm transition-opacity duration-300">
@@ -88,7 +82,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
       </button>
 
       {/* Navigation Buttons */}
-      {media.length > 1 && (
+      {images.length > 1 && (
         <>
           <button
             onClick={prevImage}
@@ -105,29 +99,15 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
         </>
       )}
 
-      {/* Main Media Content */}
+      {/* Main Image */}
       <div className="relative max-w-7xl w-full h-full flex flex-col items-center justify-center p-4 md:p-10">
-        {currentItem.type === "video" ? (
-          <video
-            src={currentItem.src}
-            poster={currentItem.poster}
-            controls
-            autoPlay
-            className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm outline-none"
-          >
-            Your browser does not support the video tag.
-          </video>
-        ) : (
-          <img
-            src={currentItem.src}
-            alt={`View ${currentIndex + 1}`}
-            className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm animate-fade-in"
-          />
-        )}
-
+        <img
+          src={images[currentIndex]}
+          alt={`View ${currentIndex + 1}`}
+          className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm animate-fade-in"
+        />
         <div className="absolute bottom-6 left-0 w-full text-center text-white/50 text-sm tracking-widest font-mono">
-          {currentIndex + 1} / {media.length}{" "}
-          {currentItem.type === "video" && "(Video)"}
+          {currentIndex + 1} / {images.length}
         </div>
       </div>
     </div>

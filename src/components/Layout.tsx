@@ -93,7 +93,7 @@ const Layout: React.FC = () => {
             >
               {/* Replaced Icon with Logo Image */}
               <img
-                src="logo.png"
+                src="logo.avif"
                 alt="East Pointe Logo"
                 className="h-10 md:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               />
@@ -284,7 +284,7 @@ const Layout: React.FC = () => {
               <div className="flex items-center gap-5 group mb-8">
                 {/* Replaced Icon with Logo Image */}
                 <img
-                  src="logo.png"
+                  src="logo.avif"
                   alt="East Pointe Logo"
                   className="h-10 md:h-12 w-auto object-contain"
                 />

@@ -70,7 +70,7 @@ const FadeIn: React.FC<{
 };
 
 // Helper to generate image paths based on folder structure
-const getImages = (folder: string, count: number, ext: string = "jpeg") =>
+const getImages = (folder: string, count: number, ext: string = "avif") =>
   Array.from({ length: count }, (_, i) => `/Cabin/${folder}/${i + 1}.${ext}`);
 
 const cabins: CabinData[] = [
@@ -103,9 +103,7 @@ const cabins: CabinData[] = [
       { room: "Loft", bed: "4 Twin Beds" },
       { room: "Living Room", bed: "1 Full Sleeper Sofa" },
     ],
-    video: "/Cabin/Bayview/tour.mp4",
-    videoThumbnail: "/Cabin/Bayview/video_thumb.jpg",
-    images: getImages("Bayview", 35, "jpeg"),
+    images: getImages("Bayview", 35, "avif"),
     bookingLink: "#",
   },
   {
@@ -128,9 +126,7 @@ const cabins: CabinData[] = [
       "Driveway parking (2 vehicles)",
     ],
     sleepingArrangements: [{ room: "Studio", bed: "1 Queen Bed" }],
-    video: "/Cabin/Aston Harbor/tour.mp4",
-    videoThumbnail: "/Cabin/Aston Harbor/video_thumb.jpg",
-    images: getImages("Aston Harbor", 23, "jpeg"),
+    images: getImages("Aston Harbor", 23, "avif"),
     bookingLink: "#",
   },
   {
@@ -157,9 +153,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 2", bed: "1 Full Bed" },
       { room: "Bedroom 3", bed: "3 Twin Beds" },
     ],
-    video: "/Cabin/Aspire/tour.mp4",
-    videoThumbnail: "/Cabin/Aspire/video_thumb.jpg",
-    images: getImages("Aspire", 33, "jpg"),
+    images: getImages("Aspire", 33, "avif"),
     bookingLink: "#",
   },
   {
@@ -187,9 +181,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 2", bed: "2 Twin Beds" },
       { room: "Living Room", bed: "1 Sleeper Sofa" },
     ],
-    video: "/Cabin/Cedar Pointe/tour.mp4",
-    videoThumbnail: "/Cabin/Cedar Pointe/video_thumb.jpg",
-    images: getImages("Cedar Pointe", 42, "jpeg"),
+    images: getImages("Cedar Pointe", 42, "avif"),
     bookingLink: "#",
   },
   {
@@ -215,8 +207,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 1", bed: "1 Queen Bed" },
       { room: "Bedroom 2", bed: "2 Twin Beds" },
     ],
-    // Video removed for Byrd's Nest
-    images: getImages("BYRD's Nest", 12, "jpeg"),
+    images: getImages("BYRD's Nest", 12, "avif"),
     bookingLink: "#",
   },
   {
@@ -278,7 +269,7 @@ const CabinCollection: React.FC = () => {
       <Hero
         title="Lake Cabin Collection"
         subtitle="Discover our range of cabins designed to accommodate all group sizes, whether you're planning a cozy getaway for two or a lively retreat for a large gathering."
-        image="/Cabin/CabinHero.jpg"
+        image="/Cabin/CabinHero.avif"
         height="large"
       />
 
@@ -312,11 +303,14 @@ const CabinCollection: React.FC = () => {
           <div className="lg:col-span-1 h-[500px] lg:h-[600px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
             <video
               className="w-full h-full object-cover"
-              poster="/Cabin/EastPointeAerial_thumb.jpg"
+              poster="/Cabin/EastPointeAerial_thumb.avif"
               controls
               playsInline
             >
-              <source src="/Cabin/EastPointeAerial.mp4" type="video/mp4" />
+              <source
+                src="https://res.cloudinary.com/dusub2qg5/video/upload/v1769971765/EastPointeAerial_ve13um.mp4"
+                type="video/mp4"
+              />
               Your browser does not support the video tag.
             </video>
 
@@ -334,7 +328,7 @@ const CabinCollection: React.FC = () => {
             onClick={() => setIsMapOpen(true)}
           >
             <img
-              src="/Map.jpg"
+              src="/Map.avif"
               alt="East Pointe Property Map"
               className="w-full h-full object-cover"
             />
@@ -423,13 +417,6 @@ const CabinCollection: React.FC = () => {
                   >
                     {cabin.status === "Available" ? "Available" : "Coming Soon"}
                   </div>
-
-                  {/* Video Badge (if applicable) */}
-                  {cabin.video && (
-                    <div className="absolute top-4 left-4 z-10 text-white drop-shadow-md">
-                      <PlayCircle size={32} fill="rgba(0,0,0,0.3)" />
-                    </div>
-                  )}
 
                   {/* Index Number */}
                   <div className="absolute bottom-4 left-4 z-10">
@@ -616,7 +603,7 @@ const CabinCollection: React.FC = () => {
       <ImageViewer
         isOpen={isMapOpen}
         onClose={() => setIsMapOpen(false)}
-        media={[{ type: "image", src: "/Map.jpg" }]}
+        images={["/Map.avif"]}
       />
     </div>
   );

@@ -15,7 +15,7 @@ const BecomeFamily: React.FC = () => {
       <Hero
         title="Membership"
         subtitle="Join our exclusive community of nature lovers and luxury seekers."
-        image="/Membership/MembershipHero.webp"
+        image="/Membership/MembershipHero.avif"
         height="medium"
       />
 

@@ -27,7 +27,7 @@ const BeyondCabin: React.FC = () => {
       <Hero
         title="Explore the Region"
         subtitle="Your ideal lake getaway, just a quick drive from the heart of Kansas City."
-        image="/Explore/ExploreHero.webp"
+        image="/Explore/ExploreHero.avif"
         height="large"
       />
 
@@ -58,7 +58,7 @@ const BeyondCabin: React.FC = () => {
             <div className="md:w-1/2 relative">
               <div className="absolute top-4 left-4 w-full h-full border-2 border-accent rounded-sm z-0"></div>
               <img
-                src="/Explore/QuickDrive.webp"
+                src="/Explore/QuickDrive.avif"
                 alt="Scenic Drive"
                 className="relative z-10 w-full h-[400px] object-cover rounded-sm shadow-xl"
               />
@@ -107,7 +107,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 1: Sports */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="/Explore/ChiefsAndRoyals.jpeg"
+              src="/Explore/ChiefsAndRoyals.avif"
               alt="KC Sports"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -132,7 +132,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 2: Culture */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="/Explore/UnionStation.webp"
+              src="/Explore/UnionStation.avif"
               alt="Union Station"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -156,7 +156,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 3: Entertainment */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="/Explore/PowerAndLight.jpeg"
+              src="/Explore/PowerAndLight.avif"
               alt="Nightlife"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -180,7 +180,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 4: Shopping & Dining */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="/Explore/CountryPlaza.jpeg"
+              src="/Explore/CountryPlaza.avif"
               alt="Plaza"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

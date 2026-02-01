@@ -82,7 +82,7 @@ const CAROUSEL_ITEMS = [
     title: "The Collection",
     desc: "Discover our hand-picked portfolio of luxury cabins, each offering unique architecture and premium amenities.",
     link: "/cabins",
-    img: "Cabin/Aspire/1.jpg",
+    img: "Cabin/Aspire/1.avif",
     icon: Star,
   },
   {
@@ -90,7 +90,7 @@ const CAROUSEL_ITEMS = [
     title: "Comfort & Ease",
     desc: "From chef's kitchens to high-speed wifi, we've curated every detail to make your stay effortless.",
     link: "/comfort",
-    img: "Cabin/Bayview/2.jpeg",
+    img: "Cabin/Bayview/2.avif",
     icon: Wind,
   },
   {
@@ -98,7 +98,7 @@ const CAROUSEL_ITEMS = [
     title: "Gather Together",
     desc: "Spaces designed for connection. Large dining tables, fire pits, and game rooms for making memories.",
     link: "/gather",
-    img: "/Home/Comfort.jpg",
+    img: "/Home/Comfort.avif",
     icon: Users,
   },
   {
@@ -106,7 +106,7 @@ const CAROUSEL_ITEMS = [
     title: "Explore Nature",
     desc: "Hiking trails, alpine lakes, and hidden waterfalls await just minutes from your doorstep.",
     link: "/beyond",
-    img: "/Home/Nature.jpg",
+    img: "/Home/Nature.avif",
     icon: MountainIcon,
   },
 ];
@@ -181,7 +181,7 @@ const Home: React.FC = () => {
     name: "East Pointe",
     description:
       "Luxury lake cabin experience and community nestled in nature near Kansas City.",
-    image: "https://www.eastpointekc.com/logo.png",
+    image: "https://www.eastpointekc.com/logo.avif",
     url: "https://www.eastpointekc.com",
     telephone: "+18005550123",
     email: "nick@eastpointekc.com",
@@ -206,14 +206,14 @@ const Home: React.FC = () => {
       <SEO
         title="Luxury Lake Cabin Experience near Kansas City"
         description="Experience the perfect balance of rugged nature and refined comfort at East Pointe. Luxury lake cabin rentals in Odessa, MO, just minutes from Kansas City."
-        image="/Home/LandingImage.jpeg"
+        image="/Home/LandingImage.avif"
         schema={schema}
       />
 
       {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden">
         <img
-          src="/Home/LandingImage.jpeg"
+          src="/Home/LandingImage.avif"
           alt="East Pointe Luxury Cabins"
           className="absolute inset-0 w-full h-full object-cover animate-scale-in"
         />
@@ -351,7 +351,7 @@ const Home: React.FC = () => {
           {/* Image Side (Left) - Height Driven by Image */}
           <div className="md:w-1/2">
             <img
-              src="/Map.jpg"
+              src="/Map.avif"
               alt="Property Map"
               className="w-full h-auto block"
             />
@@ -402,7 +402,7 @@ const Home: React.FC = () => {
           <FadeIn delay={0}>
             <div className="relative group overflow-hidden h-[500px] cursor-pointer">
               <img
-                src="/Home/Hiking.jpeg"
+                src="/Home/Hiking.avif"
                 alt="Hiking"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -428,7 +428,7 @@ const Home: React.FC = () => {
           <FadeIn delay={150}>
             <div className="relative group overflow-hidden h-[500px] cursor-pointer">
               <img
-                src="/Membership/MembershipHero.webp"
+                src="/Membership/MembershipHero.avif"
                 alt="Lake"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -751,7 +751,7 @@ const Home: React.FC = () => {
       <section
         className="relative py-40 bg-fixed bg-cover bg-center group"
         style={{
-          backgroundImage: 'url("/Home/HomeCTA.jpeg")',
+          backgroundImage: 'url("/Home/HomeCTA.avif")',
         }}
       >
         {/* Subtle hover effect: Starts at 50% opacity, fades to 25% opacity on hover */}
