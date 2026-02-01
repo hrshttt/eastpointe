@@ -12,14 +12,21 @@ import {
   ArrowRight,
   Navigation,
 } from "lucide-react";
+import SEO from "../components/SEO";
 
 const GatherConnect: React.FC = () => {
   return (
     <div className="bg-stone-50">
+      <SEO
+        title="Weddings, Reunions & Corporate Retreats"
+        description="Host your intimate wedding, family reunion, or corporate retreat at East Pointe. A stunning lakeside backdrop for unforgettable gatherings."
+        url="https://www.eastpointekc.com/gather"
+      />
+
       <Hero
         title="Gather & Celebrate"
         subtitle="Create lasting memories in the heart of nature."
-        image="/Community/CommunityHero.jpg"
+        image="/Community/CommunityHero.jpeg"
         height="large"
       />
 
@@ -49,7 +56,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=1500"
+                src="/Community/Wedding.jpg"
                 alt="Weddings"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -86,7 +93,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden transform md:-translate-y-4">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=1500"
+                src="/Community/Reunion.jpeg"
                 alt="Reunions"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -123,7 +130,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1500"
+                src="/Community/Corporate.jpeg"
                 alt="Corporate Retreats"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />

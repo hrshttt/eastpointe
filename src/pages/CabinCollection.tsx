@@ -9,8 +9,12 @@ import {
   Camera,
   Map as MapIcon,
   Navigation,
+  PlayCircle,
+  Maximize2,
 } from "lucide-react";
 import CabinModal, { CabinData } from "../components/CabinModal";
+import ImageViewer from "../components/ImageViewer";
+import SEO from "../components/SEO";
 
 // --- Animation Hook & Component ---
 
@@ -99,7 +103,9 @@ const cabins: CabinData[] = [
       { room: "Loft", bed: "4 Twin Beds" },
       { room: "Living Room", bed: "1 Full Sleeper Sofa" },
     ],
-    images: getImages("Bayview", 13, "jpeg"),
+    video: "/Cabin/Bayview/tour.mp4",
+    videoThumbnail: "/Cabin/Bayview/video_thumb.jpg",
+    images: getImages("Bayview", 35, "jpeg"),
     bookingLink: "#",
   },
   {
@@ -122,7 +128,9 @@ const cabins: CabinData[] = [
       "Driveway parking (2 vehicles)",
     ],
     sleepingArrangements: [{ room: "Studio", bed: "1 Queen Bed" }],
-    images: getImages("Aston Harbor", 10, "jpeg"),
+    video: "/Cabin/Aston Harbor/tour.mp4",
+    videoThumbnail: "/Cabin/Aston Harbor/video_thumb.jpg",
+    images: getImages("Aston Harbor", 23, "jpeg"),
     bookingLink: "#",
   },
   {
@@ -149,7 +157,9 @@ const cabins: CabinData[] = [
       { room: "Bedroom 2", bed: "1 Full Bed" },
       { room: "Bedroom 3", bed: "3 Twin Beds" },
     ],
-    images: getImages("Aspire", 18, "jpg"),
+    video: "/Cabin/Aspire/tour.mp4",
+    videoThumbnail: "/Cabin/Aspire/video_thumb.jpg",
+    images: getImages("Aspire", 33, "jpg"),
     bookingLink: "#",
   },
   {
@@ -177,7 +187,9 @@ const cabins: CabinData[] = [
       { room: "Bedroom 2", bed: "2 Twin Beds" },
       { room: "Living Room", bed: "1 Sleeper Sofa" },
     ],
-    images: getImages("Cedar Pointe", 12, "jpeg"),
+    video: "/Cabin/Cedar Pointe/tour.mp4",
+    videoThumbnail: "/Cabin/Cedar Pointe/video_thumb.jpg",
+    images: getImages("Cedar Pointe", 42, "jpeg"),
     bookingLink: "#",
   },
   {
@@ -203,6 +215,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 1", bed: "1 Queen Bed" },
       { room: "Bedroom 2", bed: "2 Twin Beds" },
     ],
+    // Video removed for Byrd's Nest
     images: getImages("BYRD's Nest", 12, "jpeg"),
     bookingLink: "#",
   },
@@ -244,6 +257,7 @@ const cabins: CabinData[] = [
 
 const CabinCollection: React.FC = () => {
   const [selectedCabin, setSelectedCabin] = useState<CabinData | null>(null);
+  const [isMapOpen, setIsMapOpen] = useState(false);
 
   const openModal = (cabin: CabinData) => {
     setSelectedCabin(cabin);
@@ -255,6 +269,12 @@ const CabinCollection: React.FC = () => {
 
   return (
     <div className="bg-stone-50 pb-0">
+      <SEO
+        title="The Cabin Collection | Luxury Rentals"
+        description="Explore our hand-picked portfolio of luxury cabins including Bayview, Byrd's Nest, and Aspire. Perfect for family reunions, couples, and retreats in Odessa, MO."
+        url="https://www.eastpointekc.com/cabins"
+      />
+
       <Hero
         title="Lake Cabin Collection"
         subtitle="Discover our range of cabins designed to accommodate all group sizes, whether you're planning a cozy getaway for two or a lively retreat for a large gathering."
@@ -269,7 +289,7 @@ const CabinCollection: React.FC = () => {
       />
 
       {/* Intro Text Block */}
-      <section className="bg-white py-20 border-b border-stone-100">
+      <section className="bg-white pt-20 pb-12">
         <div className="container mx-auto px-6 text-center max-w-3xl">
           <span className="text-accent text-sm font-bold uppercase tracking-[0.2em] mb-4 block">
             Our Portfolio
@@ -282,6 +302,67 @@ const CabinCollection: React.FC = () => {
             intentions. Click on any cabin below to view full details, sleeping
             arrangements, and amenities.
           </p>
+        </div>
+      </section>
+
+      {/* Bento Grid: Video & Map */}
+      <section className="container mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Portrait Video */}
+          <div className="lg:col-span-1 h-[500px] lg:h-[600px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
+            <video
+              className="w-full h-full object-cover"
+              poster="/Cabin/EastPointeAerial_thumb.jpg"
+              controls
+              playsInline
+            >
+              <source src="/Cabin/EastPointeAerial.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay Badge */}
+            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 pointer-events-none">
+              <span className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                <PlayCircle size={14} className="text-accent" /> Aerial Tour
+              </span>
+            </div>
+          </div>
+
+          {/* Map */}
+          <div
+            className="lg:col-span-2 h-[500px] lg:h-[600px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-100 cursor-pointer"
+            onClick={() => setIsMapOpen(true)}
+          >
+            <img
+              src="/Map.jpg"
+              alt="East Pointe Property Map"
+              className="w-full h-full object-cover"
+            />
+
+            {/* Gradient & Text Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 lg:opacity-60 transition-opacity duration-300 pointer-events-none"></div>
+
+            {/* Fullscreen Hint */}
+            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+              <Maximize2 className="text-white" size={20} />
+            </div>
+
+            <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full pointer-events-none">
+              <div className="flex items-center gap-2 text-accent mb-3">
+                <MapIcon size={20} />
+                <span className="text-xs font-bold uppercase tracking-widest">
+                  Property Layout
+                </span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-serif text-white mb-2">
+                Grounds Map
+              </h3>
+              <p className="text-stone-300 max-w-lg font-light leading-relaxed hidden md:block">
+                Get oriented with our property layout showing cabin locations,
+                lake access points, and walking trails throughout the estate.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -316,7 +397,7 @@ const CabinCollection: React.FC = () => {
                           <span className="block font-serif text-2xl text-primary mb-1">
                             Coming Soon
                           </span>
-                          <span className="block text-[10px] uppercase tracking-[0.25em] text-stone-500 font-bold">
+                          <span className="block text-[10px] uppercase tracking-[0.2em] text-stone-500 font-bold">
                             New Addition
                           </span>
                         </div>
@@ -343,8 +424,15 @@ const CabinCollection: React.FC = () => {
                     {cabin.status === "Available" ? "Available" : "Coming Soon"}
                   </div>
 
+                  {/* Video Badge (if applicable) */}
+                  {cabin.video && (
+                    <div className="absolute top-4 left-4 z-10 text-white drop-shadow-md">
+                      <PlayCircle size={32} fill="rgba(0,0,0,0.3)" />
+                    </div>
+                  )}
+
                   {/* Index Number */}
-                  <div className="absolute top-0 left-0 p-4 z-10">
+                  <div className="absolute bottom-4 left-4 z-10">
                     <span className="text-5xl font-serif text-white/90 drop-shadow-md opacity-80">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
@@ -441,29 +529,6 @@ const CabinCollection: React.FC = () => {
         </div>
       </section>
 
-      {/* Property Map Section */}
-      <section className="bg-white py-20 border-t border-stone-100">
-        <div className="container mx-auto px-6 max-w-6xl">
-          <div className="bg-stone-50 p-2 md:p-4 rounded-sm border border-stone-100 shadow-inner">
-            <div className="relative overflow-hidden group">
-              <img
-                src="/Map.jpg"
-                alt="East Pointe Property Map"
-                className="w-full h-auto object-cover rounded-sm shadow-sm transition-transform duration-700 group-hover:scale-[1.01]"
-              />
-              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-md px-5 py-2.5 rounded-sm shadow-md border-l-4 border-accent">
-                <span className="text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                  <MapIcon size={16} className="text-accent" /> Property Map
-                </span>
-              </div>
-            </div>
-            <p className="text-center text-stone-400 text-xs mt-3 italic tracking-wide">
-              Illustrated map of East Pointe grounds, cabins, and lake access.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Come See Us Section */}
       <section className="bg-primary text-white py-24 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-accent/5 skew-x-12 transform translate-x-20"></div>
@@ -547,6 +612,12 @@ const CabinCollection: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <ImageViewer
+        isOpen={isMapOpen}
+        onClose={() => setIsMapOpen(false)}
+        media={[{ type: "image", src: "/Map.jpg" }]}
+      />
     </div>
   );
 };

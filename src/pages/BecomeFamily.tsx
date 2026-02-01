@@ -1,14 +1,21 @@
 import React from "react";
 import Hero from "../components/Hero";
 import { Check, Mail, Phone, ArrowRight } from "lucide-react";
+import SEO from "../components/SEO";
 
 const BecomeFamily: React.FC = () => {
   return (
     <div className="bg-stone-50">
+      <SEO
+        title="Membership & Exclusive Perks"
+        description="Become an East Pointe member for exclusive booking priority, discounts, and access to private community events."
+        url="https://www.eastpointekc.com/family"
+      />
+
       <Hero
         title="Membership"
         subtitle="Join our exclusive community of nature lovers and luxury seekers."
-        image="https://picsum.photos/1920/1080?random=8"
+        image="/Membership/MembershipHero.webp"
         height="medium"
       />
 

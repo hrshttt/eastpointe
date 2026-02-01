@@ -15,6 +15,7 @@ import {
   Navigation,
   LogOut,
 } from "lucide-react";
+import SEO from "../components/SEO";
 
 const amenities = [
   {
@@ -72,6 +73,12 @@ const amenities = [
 const ComfortConvenience: React.FC = () => {
   return (
     <div className="bg-stone-50">
+      <SEO
+        title="Cabin Amenities & Guest Perks"
+        description="Enjoy 5-star amenities: High-speed Wifi, self check-in, private fire pits, chef's kitchens, and more. Your comfort is our priority at East Pointe."
+        url="https://www.eastpointekc.com/comfort"
+      />
+
       <Hero
         title="Guest Perks"
         subtitle="We've thought of everything, so you don't have to."

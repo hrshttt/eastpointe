@@ -13,14 +13,21 @@ import {
   Navigation,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const BeyondCabin: React.FC = () => {
   return (
     <div className="bg-stone-50">
+      <SEO
+        title="Things to Do in Odessa & Kansas City"
+        description="Discover hiking trails, lake activities, and the vibrant culture of Kansas City just a short drive away from East Pointe. The best of both worlds."
+        url="https://www.eastpointekc.com/beyond"
+      />
+
       <Hero
         title="Explore the Region"
         subtitle="Your ideal lake getaway, just a quick drive from the heart of Kansas City."
-        image="https://images.unsplash.com/photo-1634505164883-d14207902d1e?q=80&w=2070"
+        image="/Explore/ExploreHero.webp"
         height="large"
       />
 
@@ -51,7 +58,7 @@ const BeyondCabin: React.FC = () => {
             <div className="md:w-1/2 relative">
               <div className="absolute top-4 left-4 w-full h-full border-2 border-accent rounded-sm z-0"></div>
               <img
-                src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?q=80&w=1500"
+                src="/Explore/QuickDrive.webp"
                 alt="Scenic Drive"
                 className="relative z-10 w-full h-[400px] object-cover rounded-sm shadow-xl"
               />
@@ -100,7 +107,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 1: Sports */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1516283533924-d2e8cb9b646e?q=80&w=1500"
+              src="/Explore/ChiefsAndRoyals.jpeg"
               alt="KC Sports"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -125,7 +132,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 2: Culture */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1594165386762-b9eb93649989?q=80&w=1500"
+              src="/Explore/UnionStation.webp"
               alt="Union Station"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -149,7 +156,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 3: Entertainment */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1514525253440-b393452e3383?q=80&w=1500"
+              src="/Explore/PowerAndLight.jpeg"
               alt="Nightlife"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
@@ -173,7 +180,7 @@ const BeyondCabin: React.FC = () => {
           {/* Card 4: Shopping & Dining */}
           <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=1500"
+              src="/Explore/CountryPlaza.jpeg"
               alt="Plaza"
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />

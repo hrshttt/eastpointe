@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   X,
   Users,
@@ -10,8 +10,9 @@ import {
   ChevronRight,
   Maximize2,
   Ruler,
+  PlayCircle,
 } from "lucide-react";
-import ImageViewer from "./ImageViewer";
+import ImageViewer, { MediaItem } from "./ImageViewer";
 
 export interface CabinData {
   id: number;
@@ -22,6 +23,8 @@ export interface CabinData {
   desc: string;
   status: string;
   images: string[];
+  video?: string; // Path to video file
+  videoThumbnail?: string; // Path to video thumbnail image
   location?: string;
   sqFt?: string;
   features?: string[];
@@ -40,6 +43,30 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const thumbnailsRef = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // Construct the unified gallery list (Video first, then images)
+  const galleryItems: MediaItem[] = useMemo(() => {
+    if (!cabin) return [];
+
+    const items: MediaItem[] = [];
+
+    // Add video as first item if it exists
+    if (cabin.video) {
+      items.push({
+        type: "video",
+        src: cabin.video,
+        // Use videoThumbnail if available, otherwise fallback to first image
+        poster: cabin.videoThumbnail || cabin.images[0],
+      });
+    }
+
+    // Add all images
+    cabin.images.forEach((img) => {
+      items.push({ type: "image", src: img });
+    });
+
+    return items;
+  }, [cabin]);
 
   useEffect(() => {
     if (isOpen) {
@@ -67,17 +94,32 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
     }
   }, [currentImageIndex, isOpen, cabin]);
 
+  // Smart Preload: Preload the NEXT image (skip if next is video)
+  useEffect(() => {
+    if (isOpen && galleryItems.length > 1) {
+      const nextIndex = (currentImageIndex + 1) % galleryItems.length;
+      const nextItem = galleryItems[nextIndex];
+
+      if (nextItem.type === "image") {
+        const img = new Image();
+        img.src = nextItem.src;
+      }
+    }
+  }, [currentImageIndex, isOpen, galleryItems]);
+
   if (!isOpen || !cabin) return null;
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % cabin.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % galleryItems.length);
   };
 
   const prevImage = () => {
     setCurrentImageIndex(
-      (prev) => (prev - 1 + cabin.images.length) % cabin.images.length,
+      (prev) => (prev - 1 + galleryItems.length) % galleryItems.length,
     );
   };
+
+  const currentItem = galleryItems[currentImageIndex];
 
   return (
     <>
@@ -104,21 +146,45 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
             <X size={24} />
           </button>
 
-          {/* Left Side: Image Gallery */}
+          {/* Left Side: Media Gallery */}
           <div className="w-full md:w-1/2 bg-stone-100 relative flex flex-col h-[40vh] md:h-full group">
             <div
-              className="relative flex-grow overflow-hidden cursor-zoom-in"
+              className="relative flex-grow overflow-hidden bg-black flex items-center justify-center cursor-pointer"
               onClick={() => setIsViewerOpen(true)}
             >
-              <img
-                src={cabin.images[currentImageIndex]}
-                alt={cabin.name}
-                className="w-full h-full object-cover"
-              />
+              {currentItem.type === "video" ? (
+                <div className="relative w-full h-full flex items-center justify-center bg-black">
+                  <video
+                    src={currentItem.src}
+                    poster={currentItem.poster}
+                    className="w-full h-full object-contain opacity-90"
+                    muted
+                    playsInline
+                    // Note: We don't autoplay here to avoid annoyance,
+                    // but user can click to open full viewer which auto-plays
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <PlayCircle
+                      size={64}
+                      className="text-white/80 drop-shadow-lg"
+                      fill="rgba(0,0,0,0.5)"
+                    />
+                  </div>
+                  <div className="absolute bottom-4 left-4 bg-accent/90 text-primary text-xs font-bold px-3 py-1 rounded-sm uppercase tracking-widest">
+                    Video Tour
+                  </div>
+                </div>
+              ) : (
+                <img
+                  src={currentItem.src}
+                  alt={cabin.name}
+                  className="w-full h-full object-cover"
+                />
+              )}
 
               {/* Photo Counter Badge */}
-              <div className="absolute bottom-4 left-4 bg-black/60 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-md pointer-events-none border border-white/10 shadow-sm">
-                {currentImageIndex + 1} / {cabin.images.length}
+              <div className="absolute bottom-4 right-4 bg-black/60 text-white text-xs font-bold px-3 py-1.5 rounded-full backdrop-blur-md pointer-events-none border border-white/10 shadow-sm">
+                {currentImageIndex + 1} / {galleryItems.length}
               </div>
 
               {/* Fullscreen Icon Hint */}
@@ -151,20 +217,38 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
 
             {/* Thumbnails strip */}
             <div className="h-20 bg-primary/5 flex overflow-x-auto snap-x scrollbar-hide">
-              {cabin.images.map((img, idx) => (
+              {galleryItems.map((item, idx) => (
                 <button
                   key={idx}
                   ref={(el) => {
                     thumbnailsRef.current[idx] = el;
                   }}
                   onClick={() => setCurrentImageIndex(idx)}
-                  className={`flex-shrink-0 w-24 h-full relative snap-start transition-all duration-200 ${currentImageIndex === idx ? "opacity-100 ring-2 ring-inset ring-secondary z-10" : "opacity-60 hover:opacity-100"}`}
+                  className={`flex-shrink-0 w-24 h-full relative snap-start transition-all duration-200 border-r border-white/10 ${currentImageIndex === idx ? "opacity-100 ring-2 ring-inset ring-secondary z-10" : "opacity-60 hover:opacity-100"}`}
                 >
-                  <img
-                    src={img}
-                    alt="thumbnail"
-                    className="w-full h-full object-cover"
-                  />
+                  {item.type === "video" ? (
+                    <div className="w-full h-full relative bg-black">
+                      <img
+                        src={item.poster}
+                        alt="Video Thumbnail"
+                        loading="lazy"
+                        className="w-full h-full object-cover opacity-70"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <PlayCircle
+                          size={24}
+                          className="text-white drop-shadow-md"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <img
+                      src={item.src}
+                      alt={`thumbnail ${idx}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                  )}
                 </button>
               ))}
             </div>
@@ -317,7 +401,7 @@ const CabinModal: React.FC<CabinModalProps> = ({ cabin, isOpen, onClose }) => {
       <ImageViewer
         isOpen={isViewerOpen}
         onClose={() => setIsViewerOpen(false)}
-        images={cabin.images}
+        media={galleryItems}
         initialIndex={currentImageIndex}
       />
     </>

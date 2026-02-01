@@ -20,6 +20,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 // --- Animation Hook & Component ---
 
@@ -118,8 +119,6 @@ const Home: React.FC = () => {
   useEffect(() => {
     if (sliderRef.current) {
       const scrollContainer = sliderRef.current;
-      // Wait slightly for layout to settle if needed, or check regularly in animation loop
-      // We'll rely on the animation loop to snap it if it starts at 0
       if (scrollContainer.scrollLeft === 0 && scrollContainer.scrollWidth > 0) {
         scrollContainer.scrollLeft = scrollContainer.scrollWidth / 3;
       }
@@ -134,23 +133,15 @@ const Home: React.FC = () => {
       if (!sliderRef.current) return;
       const scrollContainer = sliderRef.current;
 
-      // Calculate the width of one set of items (Total / 3 sets)
       const oneSetWidth = scrollContainer.scrollWidth / 3;
 
-      // Move slider if not hovering
       if (!isHovered) {
-        scrollContainer.scrollLeft += 1; // Adjust speed (pixels per frame)
+        scrollContainer.scrollLeft += 1;
       }
 
-      // --- Infinite Boundary Checks ---
-
-      // If we scroll past the 2nd set (entering the 3rd), jump back to start of 2nd
       if (scrollContainer.scrollLeft >= oneSetWidth * 2) {
         scrollContainer.scrollLeft -= oneSetWidth;
-      }
-      // If we are in the 1st set (e.g. scrolled back too far), jump forward to 2nd
-      // We use a small buffer (5) to ensure we don't get stuck at exactly 0
-      else if (scrollContainer.scrollLeft <= 5) {
+      } else if (scrollContainer.scrollLeft <= 5) {
         scrollContainer.scrollLeft += oneSetWidth;
       }
 
@@ -165,27 +156,18 @@ const Home: React.FC = () => {
     if (!sliderRef.current) return;
     const scrollContainer = sliderRef.current;
 
-    // Width of one full copy of the data
     const oneSetWidth = scrollContainer.scrollWidth / 3;
-
-    // Scroll amount per click
     const scrollAmount =
       scrollContainer.clientWidth < 768
         ? window.innerWidth * 0.85
         : window.innerWidth * 0.3;
 
     if (direction === "left") {
-      // Infinite Backwards Logic:
-      // If we are currently in the 1st set (leftmost third), we are in danger of hitting edge 0.
-      // Jump instantly to the 2nd set (middle) before scrolling left.
       if (scrollContainer.scrollLeft < oneSetWidth) {
         scrollContainer.scrollLeft += oneSetWidth;
       }
       scrollContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     } else {
-      // Infinite Forwards Logic:
-      // If we are in the 3rd set (rightmost third), we are in danger of running out.
-      // Jump instantly to the 2nd set (middle) before scrolling right.
       if (scrollContainer.scrollLeft >= oneSetWidth * 2) {
         scrollContainer.scrollLeft -= oneSetWidth;
       }
@@ -193,8 +175,41 @@ const Home: React.FC = () => {
     }
   };
 
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "East Pointe",
+    description:
+      "Luxury lake cabin experience and community nestled in nature near Kansas City.",
+    image: "https://www.eastpointekc.com/logo.png",
+    url: "https://www.eastpointekc.com",
+    telephone: "+18005550123",
+    email: "nick@eastpointekc.com",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Lake Lafayette",
+      addressLocality: "Odessa",
+      addressRegion: "MO",
+      postalCode: "64076",
+      addressCountry: "US",
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 38.9458417,
+      longitude: -93.9713331,
+    },
+    priceRange: "$$$",
+  };
+
   return (
     <div className="bg-white">
+      <SEO
+        title="Luxury Lake Cabin Experience near Kansas City"
+        description="Experience the perfect balance of rugged nature and refined comfort at East Pointe. Luxury lake cabin rentals in Odessa, MO, just minutes from Kansas City."
+        image="/Home/LandingImage.jpeg"
+        schema={schema}
+      />
+
       {/* --- HERO SECTION --- */}
       <div className="relative h-screen w-full overflow-hidden">
         <img

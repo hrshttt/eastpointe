@@ -1,15 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, Play } from "lucide-react";
+
+export interface MediaItem {
+  type: "image" | "video";
+  src: string;
+  poster?: string;
+}
 
 interface ImageViewerProps {
-  images: string[];
+  media: MediaItem[];
   initialIndex?: number;
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ImageViewer: React.FC<ImageViewerProps> = ({
-  images,
+  media,
   initialIndex = 0,
   isOpen,
   onClose,
@@ -23,18 +29,37 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
   const nextImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setCurrentIndex((prev) => (prev + 1) % media.length);
     },
-    [images.length],
+    [media.length],
   );
 
   const prevImage = useCallback(
     (e?: React.MouseEvent) => {
       e?.stopPropagation();
-      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      setCurrentIndex((prev) => (prev - 1 + media.length) % media.length);
     },
-    [images.length],
+    [media.length],
   );
+
+  // Preload previous and next items (if they are images)
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const preloadItem = (index: number) => {
+      const item = media[index];
+      if (item.type === "image") {
+        const img = new Image();
+        img.src = item.src;
+      }
+    };
+
+    const nextIndex = (currentIndex + 1) % media.length;
+    const prevIndex = (currentIndex - 1 + media.length) % media.length;
+
+    preloadItem(nextIndex);
+    preloadItem(prevIndex);
+  }, [currentIndex, isOpen, media]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -50,6 +75,8 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
 
   if (!isOpen) return null;
 
+  const currentItem = media[currentIndex];
+
   return (
     <div className="fixed inset-0 z-[200] bg-black/95 flex items-center justify-center backdrop-blur-sm transition-opacity duration-300">
       {/* Close Button */}
@@ -61,7 +88,7 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
       </button>
 
       {/* Navigation Buttons */}
-      {images.length > 1 && (
+      {media.length > 1 && (
         <>
           <button
             onClick={prevImage}
@@ -78,15 +105,29 @@ const ImageViewer: React.FC<ImageViewerProps> = ({
         </>
       )}
 
-      {/* Main Image */}
+      {/* Main Media Content */}
       <div className="relative max-w-7xl w-full h-full flex flex-col items-center justify-center p-4 md:p-10">
-        <img
-          src={images[currentIndex]}
-          alt={`View ${currentIndex + 1}`}
-          className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm animate-fade-in"
-        />
+        {currentItem.type === "video" ? (
+          <video
+            src={currentItem.src}
+            poster={currentItem.poster}
+            controls
+            autoPlay
+            className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm outline-none"
+          >
+            Your browser does not support the video tag.
+          </video>
+        ) : (
+          <img
+            src={currentItem.src}
+            alt={`View ${currentIndex + 1}`}
+            className="max-h-[85vh] max-w-full object-contain shadow-2xl rounded-sm animate-fade-in"
+          />
+        )}
+
         <div className="absolute bottom-6 left-0 w-full text-center text-white/50 text-sm tracking-widest font-mono">
-          {currentIndex + 1} / {images.length}
+          {currentIndex + 1} / {media.length}{" "}
+          {currentItem.type === "video" && "(Video)"}
         </div>
       </div>
     </div>
