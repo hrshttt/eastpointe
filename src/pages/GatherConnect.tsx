@@ -18,8 +18,8 @@ const GatherConnect: React.FC = () => {
   return (
     <div className="bg-stone-50">
       <SEO
-        title="Weddings, Reunions & Corporate Retreats"
-        description="Host your intimate wedding, family reunion, or corporate retreat at East Pointe. A stunning lakeside backdrop for unforgettable gatherings."
+        title="Weddings, Reunions & Corporate Getaways"
+        description="Host your family retreats, reunions, or corporate getaway at East Pointe. A stunning lakeside backdrop for unforgettable gatherings."
         url="https://www.eastpointekc.com/gather"
       />
 
@@ -56,7 +56,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Wedding.avif"
+                src="/Community/Family.webp"
                 alt="Weddings"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -66,11 +66,12 @@ const GatherConnect: React.FC = () => {
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-serif text-primary mb-3">
-                Intimate Weddings
+                Family Retreats
               </h3>
               <p className="text-stone-500 font-light mb-6 leading-relaxed">
-                Say "I do" with the lake as your witness. Our grounds provide a
-                stunning, natural cathedral for ceremonies up to 50 guests.
+                Where generations come together. From shared stories to shared
+                laughter, our lakeside grounds create a relaxed, beautiful
+                backdrop for family reunions with up to 50 guests.
               </p>
               <ul className="space-y-2 text-sm text-stone-600 mb-6">
                 <li className="flex items-center gap-2">
@@ -93,7 +94,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden transform md:-translate-y-4">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Reunion.avif"
+                src="/Community/Reunion.jpeg"
                 alt="Reunions"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -130,8 +131,8 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Corporate.avif"
-                alt="Corporate Retreats"
+                src="/Community/Corporate.jpeg"
+                alt="Corporate Getaways"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute top-4 right-4 bg-white/90 p-3 rounded-full text-primary">
@@ -140,7 +141,7 @@ const GatherConnect: React.FC = () => {
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-serif text-primary mb-3">
-                Corporate Retreats
+                Corporate Getaway
               </h3>
               <p className="text-stone-500 font-light mb-6 leading-relaxed">
                 Step away from the boardroom. Our inspiring environment fosters
