@@ -104,7 +104,7 @@ const cabins: CabinData[] = [
       { room: "Living Room", bed: "1 Full Sleeper Sofa" },
     ],
     images: getImages("Bayview", 35, "avif"),
-    bookingLink: "#",
+    bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/552308",
   },
   {
     id: 4,
@@ -127,7 +127,7 @@ const cabins: CabinData[] = [
     ],
     sleepingArrangements: [{ room: "Studio", bed: "1 Queen Bed" }],
     images: getImages("Aston Harbor", 23, "avif"),
-    bookingLink: "#",
+    bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/552306",
   },
   {
     id: 5,
@@ -154,7 +154,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 3", bed: "3 Twin Beds" },
     ],
     images: getImages("Aspire", 33, "avif"),
-    bookingLink: "#",
+    bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/562679",
   },
   {
     id: 3,
@@ -182,7 +182,7 @@ const cabins: CabinData[] = [
       { room: "Living Room", bed: "1 Sleeper Sofa" },
     ],
     images: getImages("Cedar Pointe", 42, "avif"),
-    bookingLink: "#",
+    bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/552307",
   },
   {
     id: 2,
@@ -208,7 +208,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 2", bed: "2 Twin Beds" },
     ],
     images: getImages("BYRD's Nest", 12, "avif"),
-    bookingLink: "#",
+    bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/552309",
   },
   {
     id: 6,
