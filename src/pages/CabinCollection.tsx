@@ -207,7 +207,7 @@ const cabins: CabinData[] = [
       { room: "Bedroom 1", bed: "1 Queen Bed" },
       { room: "Bedroom 2", bed: "2 Twin Beds" },
     ],
-    images: getImages("BYRD's Nest", 12, "avif"),
+    images: getImages("BYRD's Nest", 36, "avif"),
     bookingLink: "https://evolve.com/vacation-rentals/us/mo/odessa/552309",
   },
   {
