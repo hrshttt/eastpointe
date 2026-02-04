@@ -300,7 +300,7 @@ const CabinCollection: React.FC = () => {
       <section className="container mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Portrait Video */}
-          <div className="lg:col-span-1 h-[500px] lg:h-[600px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
+          <div className="lg:col-span-1 h-[500px] lg:h-[680px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
             <video
               className="w-full h-full object-cover"
               poster="/Cabin/EastPointeAerial_thumb.avif"
@@ -324,7 +324,7 @@ const CabinCollection: React.FC = () => {
 
           {/* Map */}
           <div
-            className="lg:col-span-2 h-[500px] lg:h-[600px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-100 cursor-pointer"
+            className="lg:col-span-2 h-[550px] lg:h-[680px] relative rounded-sm shadow-xl group border-4 border-white bg-stone-100 cursor-pointer"
             onClick={() => setIsMapOpen(true)}
           >
             <img
