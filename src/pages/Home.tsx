@@ -403,22 +403,22 @@ const Home: React.FC = () => {
             <div className="relative group overflow-hidden h-[500px] cursor-pointer">
               <img
                 src="/Home/Hiking.avif"
-                alt="Hiking"
+                alt="Anglers Haven"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-10 opacity-90 group-hover:opacity-100 transition-opacity">
                 <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <div className="flex items-center gap-2 text-secondary mb-3">
-                    <MountainIcon size={18} />
+                    <Fish size={18} />
                     <span className="text-xs font-bold uppercase tracking-widest">
                       Adventure
                     </span>
                   </div>
                   <h3 className="text-3xl font-serif text-white mb-2">
-                    Hiking Trails
+                    Anglers Haven
                   </h3>
                   <p className="text-stone-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                    Explore miles of scenic trails right from your doorstep.
+                    A quiet cove just a short walk from the house.
                   </p>
                 </div>
               </div>

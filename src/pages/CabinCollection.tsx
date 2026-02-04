@@ -296,70 +296,6 @@ const CabinCollection: React.FC = () => {
         </div>
       </section>
 
-      {/* Bento Grid: Video & Map */}
-      <section className="container mx-auto px-6 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Portrait Video */}
-          <div className="lg:col-span-1 h-[500px] lg:h-[680px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
-            <video
-              className="w-full h-full object-cover"
-              poster="/Cabin/EastPointeAerial_thumb.avif"
-              controls
-              playsInline
-            >
-              <source
-                src="https://res.cloudinary.com/dusub2qg5/video/upload/v1769971765/EastPointeAerial_ve13um.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-
-            {/* Overlay Badge */}
-            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 pointer-events-none">
-              <span className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
-                <PlayCircle size={14} className="text-accent" /> Aerial Tour
-              </span>
-            </div>
-          </div>
-
-          {/* Map */}
-          <div
-            className="lg:col-span-2 h-[550px] lg:h-[680px] relative rounded-sm shadow-xl group border-4 border-white bg-stone-100 cursor-pointer"
-            onClick={() => setIsMapOpen(true)}
-          >
-            <img
-              src="/Map.avif"
-              alt="East Pointe Property Map"
-              className="w-full h-full object-cover"
-            />
-
-            {/* Gradient & Text Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 lg:opacity-60 transition-opacity duration-300 pointer-events-none"></div>
-
-            {/* Fullscreen Hint */}
-            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
-              <Maximize2 className="text-white" size={20} />
-            </div>
-
-            <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full pointer-events-none">
-              <div className="flex items-center gap-2 text-accent mb-3">
-                <MapIcon size={20} />
-                <span className="text-xs font-bold uppercase tracking-widest">
-                  Property Layout
-                </span>
-              </div>
-              <h3 className="text-2xl md:text-3xl font-serif text-white mb-2">
-                Grounds Map
-              </h3>
-              <p className="text-stone-300 max-w-lg font-light leading-relaxed hidden md:block">
-                Get oriented with our property layout showing cabin locations,
-                lake access points, and walking trails throughout the estate.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Cabins Grid */}
       <section className="container mx-auto px-6 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
@@ -513,6 +449,70 @@ const CabinCollection: React.FC = () => {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Bento Grid: Video & Map */}
+      <section className="container mx-auto px-6 pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Portrait Video */}
+          <div className="lg:col-span-1 h-[500px] lg:h-[680px] relative rounded-sm overflow-hidden shadow-xl group border-4 border-white bg-stone-900">
+            <video
+              className="w-full h-full object-cover"
+              poster="/Cabin/EastPointeAerial_thumb.avif"
+              controls
+              playsInline
+            >
+              <source
+                src="https://res.cloudinary.com/dusub2qg5/video/upload/v1769971765/EastPointeAerial_ve13um.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+
+            {/* Overlay Badge */}
+            <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 pointer-events-none">
+              <span className="text-white text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                <PlayCircle size={14} className="text-accent" /> Aerial Tour
+              </span>
+            </div>
+          </div>
+
+          {/* Map */}
+          <div
+            className="lg:col-span-2 h-[550px] lg:h-[680px] relative rounded-sm shadow-xl group border-4 border-white bg-stone-100 cursor-pointer"
+            onClick={() => setIsMapOpen(true)}
+          >
+            <img
+              src="/Map.avif"
+              alt="East Pointe Property Map"
+              className="w-full h-full object-cover"
+            />
+
+            {/* Gradient & Text Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 lg:opacity-60 transition-opacity duration-300 pointer-events-none"></div>
+
+            {/* Fullscreen Hint */}
+            <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md p-2 rounded-full border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110">
+              <Maximize2 className="text-white" size={20} />
+            </div>
+
+            <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full pointer-events-none">
+              <div className="flex items-center gap-2 text-accent mb-3">
+                <MapIcon size={20} />
+                <span className="text-xs font-bold uppercase tracking-widest">
+                  Property Layout
+                </span>
+              </div>
+              <h3 className="text-2xl md:text-3xl font-serif text-white mb-2">
+                Grounds Map
+              </h3>
+              <p className="text-stone-300 max-w-lg font-light leading-relaxed hidden md:block">
+                Get oriented with our property layout showing cabin locations,
+                lake access points, and walking trails throughout the estate.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

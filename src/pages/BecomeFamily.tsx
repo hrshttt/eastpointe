@@ -15,7 +15,7 @@ const BecomeFamily: React.FC = () => {
       <Hero
         title="Membership"
         subtitle="Join our exclusive community of nature lovers and luxury seekers."
-        image="/Membership/MembershipHero.avif"
+        image="https://picsum.photos/1920/1080?random=8"
         height="medium"
       />
 
@@ -137,10 +137,10 @@ const BecomeFamily: React.FC = () => {
                   <Mail size={18} /> Email Membership Team
                 </a>
                 <a
-                  href="tel:+18165550123"
+                  href="tel:+18162558683"
                   className="block w-full border border-primary text-primary font-bold py-4 px-6 rounded-sm hover:bg-stone-50 transition-all duration-300 text-center flex items-center justify-center gap-3"
                 >
-                  <Phone size={18} /> Call (816) 555-0123
+                  <Phone size={18} /> Call (816) 255-8683
                 </a>
               </div>
             </div>

@@ -14,6 +14,7 @@ import {
   Clock,
   Navigation,
   LogOut,
+  Fish,
 } from "lucide-react";
 import SEO from "../components/SEO";
 
@@ -55,7 +56,7 @@ const amenities = [
   },
   {
     icon: Coffee,
-    title: "Coffee Bar",
+    title: "Custom Coffee Bar",
     desc: "Equipped with coffee makers and pour-over options for your morning ritual.",
   },
   {
@@ -67,6 +68,21 @@ const amenities = [
     icon: LogOut,
     title: "Easy Checkout",
     desc: "Extra easy checkout experience.",
+  },
+  {
+    icon: Flame,
+    title: "Private Fire Pit",
+    desc: "These are fun and keep you engaged throughout the evening.",
+  },
+  {
+    icon: Utensils,
+    title: "Private BBQ Grill",
+    desc: "Each location has a BBQ grill... Because this is Kansas City!",
+  },
+  {
+    icon: Fish,
+    title: "Fishing Equipment",
+    desc: "Available on request. We have docks and shorelines available for you to cast your line.",
   },
 ];
 
