@@ -284,7 +284,7 @@ const Layout: React.FC = () => {
               <div className="flex items-center gap-5 group mb-8">
                 {/* Replaced Icon with Logo Image */}
                 <img
-                  src="logo.avif"
+                  src="/logo.avif"
                   alt="East Pointe Logo"
                   className="h-10 md:h-12 w-auto object-contain"
                 />
@@ -333,7 +333,9 @@ const Layout: React.FC = () => {
                     <Mail size={16} />
                   </div>
                   <div>
-                    <span className="block text-white mb-1">Email Us</span>
+                    <span className="block text-white mb-1">
+                      Email us for any questions or booking
+                    </span>
                     <span className="group-hover:text-white transition-colors">
                       nick@eastpointekc.com
                     </span>

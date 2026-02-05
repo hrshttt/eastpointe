@@ -18,8 +18,8 @@ const GatherConnect: React.FC = () => {
   return (
     <div className="bg-stone-50">
       <SEO
-        title="Weddings, Reunions & Corporate Getaways"
-        description="Host your family retreats, reunions, or corporate getaway at East Pointe. A stunning lakeside backdrop for unforgettable gatherings."
+        title="Weddings, Reunions & Corporate Retreats"
+        description="Host your intimate wedding, family reunion, or corporate retreat at East Pointe. A stunning lakeside backdrop for unforgettable gatherings."
         url="https://www.eastpointekc.com/gather"
       />
 
@@ -56,7 +56,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Family.webp"
+                src="/Community/Wedding.avif"
                 alt="Weddings"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -66,12 +66,11 @@ const GatherConnect: React.FC = () => {
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-serif text-primary mb-3">
-                Family Retreats
+                Intimate Weddings
               </h3>
               <p className="text-stone-500 font-light mb-6 leading-relaxed">
-                Where generations come together. From shared stories to shared
-                laughter, our lakeside grounds create a relaxed, beautiful
-                backdrop for family reunions with up to 50 guests.
+                Say "I do" with the lake as your witness. Our grounds provide a
+                stunning, natural cathedral for ceremonies up to 50 guests.
               </p>
               <ul className="space-y-2 text-sm text-stone-600 mb-6">
                 <li className="flex items-center gap-2">
@@ -94,7 +93,7 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden transform md:-translate-y-4">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Reunion.jpeg"
+                src="/Community/Reunion.avif"
                 alt="Reunions"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -131,8 +130,8 @@ const GatherConnect: React.FC = () => {
           <div className="group bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden">
             <div className="h-64 overflow-hidden relative">
               <img
-                src="/Community/Corporate.jpeg"
-                alt="Corporate Getaways"
+                src="/Community/Corporate.avif"
+                alt="Corporate Retreats"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute top-4 right-4 bg-white/90 p-3 rounded-full text-primary">
@@ -141,7 +140,7 @@ const GatherConnect: React.FC = () => {
             </div>
             <div className="p-8">
               <h3 className="text-2xl font-serif text-primary mb-3">
-                Corporate Getaway
+                Corporate Retreats
               </h3>
               <p className="text-stone-500 font-light mb-6 leading-relaxed">
                 Step away from the boardroom. Our inspiring environment fosters
@@ -230,7 +229,7 @@ const GatherConnect: React.FC = () => {
               </a>
 
               <a
-                href="tel:+18165550123"
+                href="tel:+18162558683"
                 className="group block bg-primary border border-white/20 hover:border-accent hover:bg-white/5 transition-all p-6 rounded-sm text-center"
               >
                 <Phone
@@ -241,7 +240,7 @@ const GatherConnect: React.FC = () => {
                   Call Us
                 </span>
                 <span className="block text-xl font-bold text-white">
-                  +1 (816) 555-0123
+                  (816) 255-8683
                 </span>
               </a>
             </div>

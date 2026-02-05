@@ -180,7 +180,7 @@ const Home: React.FC = () => {
     "@type": "LodgingBusiness",
     name: "East Pointe",
     description:
-      "Lake cabin experience and community nestled in nature near Kansas City.",
+      "Luxury lake cabin experience and community nestled in nature near Kansas City.",
     image: "https://www.eastpointekc.com/logo.avif",
     url: "https://www.eastpointekc.com",
     telephone: "+18005550123",
@@ -204,7 +204,7 @@ const Home: React.FC = () => {
   return (
     <div className="bg-white">
       <SEO
-        title="Lake Cabin Experience near Kansas City"
+        title="Luxury Lake Cabin Experience near Kansas City"
         description="Experience the perfect balance of rugged nature and refined comfort at East Pointe. Luxury lake cabin rentals in Odessa, MO, just minutes from Kansas City."
         image="/Home/LandingImage.avif"
         schema={schema}
@@ -611,43 +611,82 @@ const Home: React.FC = () => {
                   worlds away, yet conveniently close to major hubs.
                 </p>
 
-                <div className="space-y-8">
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
-                      <Car size={26} />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-8">
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Car size={20} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-xl text-white mb-1">
-                        35 Mins from Kansas City
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        35 Mins
                       </h4>
-                      <p className="text-stone-500 text-sm">
-                        A quick scenic drive east on I-70
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        Downtown Kansas City
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
-                      <Car size={26} />
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Car size={20} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-xl text-white mb-1">
-                        2.5 Hours from St. Louis
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        2.5 Hours
                       </h4>
-                      <p className="text-stone-500 text-sm">
-                        Easy access across the state
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        St. Louis
                       </p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-6 group">
-                    <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
-                      <Plane size={26} />
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Plane size={20} />
                     </div>
                     <div>
-                      <h4 className="font-bold text-xl text-white mb-1">
-                        45 Mins from MCI Airport
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        40 Mins
                       </h4>
-                      <p className="text-stone-500 text-sm">
-                        Kansas City International Airport
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        MCI Airport
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Car size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        32 Mins
+                      </h4>
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        Truman Sports Complex
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Car size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        25 Mins
+                      </h4>
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        Warrensburg
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent group-hover:text-primary transition-colors duration-300">
+                      <Car size={20} />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-base text-white mb-0.5">
+                        15 Mins
+                      </h4>
+                      <p className="text-stone-500 text-xs uppercase tracking-wide">
+                        Powell Gardens
                       </p>
                     </div>
                   </div>

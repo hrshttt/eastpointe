@@ -11,6 +11,7 @@ import {
   Clock,
   Compass,
   Navigation,
+  Leaf,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
@@ -197,6 +198,30 @@ const BeyondCabin: React.FC = () => {
               <p className="text-stone-300 font-light mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
                 Enjoy premier shopping and indulge in legendary Kansas City BBQ
                 at renowned restaurants throughout the city.
+              </p>
+            </div>
+          </div>
+
+          {/* Card 5: Powell Gardens */}
+          <div className="group relative overflow-hidden rounded-sm h-[400px] shadow-lg md:col-span-2 lg:col-span-1 lg:col-start-1 lg:col-end-3">
+            <img
+              src="/Explore/Powell.webp"
+              alt="Powell Gardens"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-10 flex flex-col justify-end">
+              <div className="flex items-center gap-3 text-accent mb-2">
+                <Leaf size={24} />
+                <span className="text-xs font-bold uppercase tracking-widest">
+                  Nature & Flora
+                </span>
+              </div>
+              <h3 className="text-3xl font-serif text-white mb-4">
+                Powell Gardens
+              </h3>
+              <p className="text-stone-300 font-light mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-4 group-hover:translate-y-0">
+                Kansas City's premier botanical garden, set on 970 acres of lush
+                meadows and diverse gardens just minutes away.
               </p>
             </div>
           </div>
