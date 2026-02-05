@@ -3,14 +3,14 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { NAV_ITEMS } from "../types";
 import {
   Menu,
-  X,
   Instagram,
   Facebook,
-  Twitter,
+  X,
   Mail,
   Mountain,
   TreePine,
   ArrowRight,
+  Twitter,
 } from "lucide-react";
 
 const Layout: React.FC = () => {
@@ -232,7 +232,7 @@ const Layout: React.FC = () => {
                   Contact Us
                 </h4>
                 <p className="text-stone-300 text-lg font-light">
-                  +1 (800) 555-0123
+                  +1 (816) 255-8683
                 </p>
                 <p className="text-stone-300 text-lg font-light">
                   nick@eastpointekc.com
@@ -244,7 +244,10 @@ const Layout: React.FC = () => {
                   Follow Us
                 </h4>
                 <div className="flex space-x-6 text-white">
-                  <a href="#" className="hover:text-accent transition-colors">
+                  <a
+                    href="https://www.instagram.com/eastpointekc/"
+                    className="hover:text-accent transition-colors"
+                  >
                     <Instagram size={24} />
                   </a>
                   <a href="#" className="hover:text-accent transition-colors">
@@ -347,7 +350,7 @@ const Layout: React.FC = () => {
                   </div>
                   <div className="flex gap-4">
                     <a
-                      href="#"
+                      href="https://www.instagram.com/eastpointekc/"
                       className="p-3 bg-white/5 rounded-full hover:bg-accent hover:text-primary transition-all duration-300"
                     >
                       <Instagram size={20} />
@@ -375,17 +378,6 @@ const Layout: React.FC = () => {
               &copy; {new Date().getFullYear()} East Pointe Collections. All
               rights reserved.
             </p>
-            <div className="flex space-x-8 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">
-                Privacy Policy
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Terms of Service
-              </a>
-              <a href="#" className="hover:text-white transition-colors">
-                Cookie Policy
-              </a>
-            </div>
           </div>
         </div>
       </footer>
